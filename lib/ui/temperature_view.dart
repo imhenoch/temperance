@@ -14,40 +14,67 @@ class TemperatureView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             flex: 1,
-            child: Column(
-              children: [
-                Text(this.scale),
-                StoreConnector<AppState, TemperatureViewModel>(
-                  converter: (store) => TemperatureViewModel.fromStore(store.state, this.scaleType, (degrees) => changeDegrees(store, degrees)),
-                  builder: (_, TemperatureViewModel vm) {
-                    return Slider(
-                      min: -600,
-                      max: 600,
-                      value: vm.degrees,
-                      onChanged: vm.onValueChanged,
-                    );
-                  },
-                )
-              ]
-            ),
+            child: Column(children: [
+              Text(this.scale),
+              StoreConnector<AppState, TemperatureViewModel>(
+                converter: (store) => TemperatureViewModel.fromStore(
+                    state: store.state,
+                    scale: this.scaleType,
+                    onValueChanged: (degrees) =>
+                        _changeDegrees(store, degrees)),
+                builder: (_, TemperatureViewModel vm) {
+                  return Slider(
+                    min: -600,
+                    max: 600,
+                    value: vm.degrees,
+                    onChanged: vm.onValueChanged,
+                  );
+                },
+              )
+            ]),
           ),
           Container(
-            width: 50,
+            width: 65,
             alignment: Alignment.center,
-            child: TextField(),
+            child: StoreConnector<AppState, TemperatureViewModel>(
+              converter: (store) => TemperatureViewModel.fromStore(
+                  state: store.state,
+                  scale: this.scaleType,
+                  onInputChanged: (input) => _changeInputDegrees(store, input)),
+              builder: (_, TemperatureViewModel vm) {
+                var _controller =
+                    TextEditingController(text: vm.degrees.toStringAsFixed(2));
+                return TextField(
+                  keyboardType: TextInputType.number,
+                  controller: _controller,
+                  onSubmitted: vm.onInputChanged,
+                );
+              },
+            ),
           )
         ],
       ),
     );
   }
 
-  void changeDegrees(Store store, double degrees) {
+  void _changeInputDegrees(Store store, String input) {
+    var degrees = 0.0;
+    if (input.isNotEmpty) {
+      degrees = double.tryParse(input);
+      if (degrees == null) {
+        degrees = 0.0;
+      }
+    }
+    _changeDegrees(store, degrees);
+  }
+
+  void _changeDegrees(Store store, double degrees) {
     switch (scaleType) {
       case ScaleType.CELSIUS:
         store.dispatch(ChangeCelsiusAction(degrees: degrees));

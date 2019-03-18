@@ -13,37 +13,37 @@ class TemperatureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, TemperatureViewModel>(
-      converter: (store) => TemperatureViewModel.fromStore(this.scaleType,
-          store.state, (degrees) => changeDegrees(store, degrees)),
-      builder: (_, TemperatureViewModel vm) {
-        return Container(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      Text(this.scale),
-                      Slider(
-                        min: -600,
-                        max: 600,
-                        value: vm.degrees,
-                        onChanged: vm.onValueChanged,
-                      )
-                    ],
-                  )),
-              Container(
-                width: 50,
-                alignment: Alignment.center,
-                child: TextField(),
-              )
-            ],
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            flex: 1,
+            child: Column(
+              children: [
+                Text(this.scale),
+                StoreConnector<AppState, TemperatureViewModel>(
+                  converter: (store) => TemperatureViewModel.fromStore(store.state, this.scaleType, (degrees) => changeDegrees(store, degrees)),
+                  builder: (_, TemperatureViewModel vm) {
+                    return Slider(
+                      min: -600,
+                      max: 600,
+                      value: vm.degrees,
+                      onChanged: vm.onValueChanged,
+                    );
+                  },
+                )
+              ]
+            ),
           ),
-        );
-      },
+          Container(
+            width: 50,
+            alignment: Alignment.center,
+            child: TextField(),
+          )
+        ],
+      ),
     );
   }
 

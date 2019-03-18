@@ -9,7 +9,7 @@ class TemperatureViewModel {
   TemperatureViewModel({this.degrees, this.onValueChanged});
 
   static TemperatureViewModel fromStore(
-      ScaleType scale, AppState state, Function onValueChanged) {
+      AppState state, ScaleType scale, Function onValueChanged) {
     switch (scale) {
       case ScaleType.CELSIUS:
         return TemperatureViewModel(

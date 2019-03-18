@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temperance/ui/temperature_view.dart';
+import 'package:temperance/view_models.dart';
 
 class ConverterPage extends StatefulWidget {
   @override
@@ -19,9 +20,10 @@ class _ConverterPageState extends State {
           alignment: Alignment.center,
           child: Column(
             children: [
-              TemperatureView(),
-              TemperatureView(),
-              TemperatureView(),
+              TemperatureView(scale: "Celsius", scaleType: ScaleType.CELSIUS),
+              TemperatureView(
+                  scale: "Fahrenheit", scaleType: ScaleType.FAHRENHEIT),
+              TemperatureView(scale: "Kelvin", scaleType: ScaleType.KELVIN),
             ],
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

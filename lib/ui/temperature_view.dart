@@ -18,12 +18,16 @@ class _TemperatureViewState extends State {
         children: [
           Flexible(
             flex: 1,
-            child: Slider(
-              min: 0,
-              max: 100,
-              value: 50,
-            ),
-          ),
+            child: Column(
+              children: [
+                Text("Scale"),
+                Slider(
+                  min: 0,
+                  max: 100,
+                  value: 50,
+                )
+              ],
+          )),
           Container(
             width: 50,
             alignment: Alignment.center,

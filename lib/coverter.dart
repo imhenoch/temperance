@@ -21,5 +21,5 @@ double kelvinToCelsius(double kelvin) {
 }
 
 double kelvinToFahrenheit(double kelvin) {
-  return kelvin * (5.0 / 9.0) - 459.67;
+  return kelvin * (9.0 / 5.0) - 459.67;
 }

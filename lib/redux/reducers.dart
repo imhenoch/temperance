@@ -15,8 +15,8 @@ AppState appReducer(AppState state, dynamic action) {
 }
 
 AppState _changeCelsius(AppState state, double celsius) {
-  if (celsius > 273) {
-    celsius = 273;
+  if (celsius > 315) {
+    celsius = 315;
   } else if (celsius < -351) {
     celsius = -351;
   }
@@ -34,8 +34,8 @@ AppState _changeFahrenheit(AppState state, double fahrenheit) {
 }
 
 AppState _changeKelvin(AppState state, double kelvin) {
-  if(kelvin > 546) {
-    kelvin = 546;
+  if(kelvin > 588) {
+    kelvin = 588;
   } else if(kelvin < -77) {
     kelvin = -77;
   }

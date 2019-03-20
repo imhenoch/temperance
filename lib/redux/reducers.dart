@@ -15,10 +15,10 @@ AppState appReducer(AppState state, dynamic action) {
 }
 
 AppState _changeCelsius(AppState state, double celsius) {
-  if (celsius > 315) {
-    celsius = 315;
-  } else if (celsius < -351) {
-    celsius = -351;
+  if (celsius > 537) {
+    celsius = 537;
+  } else if (celsius < -573) {
+    celsius = -573;
   }
   return state.copyWith(
       celsius: celsius,
@@ -34,10 +34,10 @@ AppState _changeFahrenheit(AppState state, double fahrenheit) {
 }
 
 AppState _changeKelvin(AppState state, double kelvin) {
-  if(kelvin > 588) {
-    kelvin = 588;
-  } else if(kelvin < -77) {
-    kelvin = -77;
+  if(kelvin > 810) {
+    kelvin = 810;
+  } else if(kelvin < -300) {
+    kelvin = -300;
   }
   return state.copyWith(
       celsius: kelvinToCelsius(kelvin),

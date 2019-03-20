@@ -32,8 +32,8 @@ class TemperatureView extends StatelessWidget {
                 child: Column(children: [
                   Text(this.scale),
                   Slider(
-                    min: -600,
-                    max: 600,
+                    min: -1000,
+                    max: 1000,
                     value: vm.degrees,
                     onChanged: vm.onValueChanged,
                   )
